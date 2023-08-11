@@ -27,7 +27,7 @@ function CreateCharitiesPage() {
   const ingredientRef = useRef(null);
   const equipmentRef = useRef(null);
   const charityToEdit = JSON.parse(
-    localStorage.getItem("Mama-charity-edit-charity")
+    localStorage.getItem("Health-first-edit-charity")
   );
   const localStorageInfo = JSON.parse(
     localStorage.getItem("Mama-charity-created")
@@ -47,10 +47,6 @@ function CreateCharitiesPage() {
     const name = input.name;
     const value = input.value;
     dispatch(handleChange({ name, value }));
-    if (value.includes(",")) {
-      ingredientRef.current.value = "";
-      equipmentRef.current.value = "";
-    }
   };
   const handleImageUpload = (e) => {
     const input = e.target;
@@ -71,7 +67,7 @@ function CreateCharitiesPage() {
           image,
         })
       );
-      localStorage.removeItem("Mama-charity-edit-charity");
+      localStorage.removeItem("Health-first-edit-charity");
     } else {
       dispatch(
         createCharity({
@@ -103,7 +99,7 @@ function CreateCharitiesPage() {
   }, [localStorageInfo]);
   useEffect(() => {
     if (window.location.pathname.includes("add")) {
-      localStorage.removeItem("Mama-charity-edit-charity");
+      localStorage.removeItem("Health-first-edit-charity");
     }
   }, []);
   if (isLoading) {
@@ -119,7 +115,7 @@ function CreateCharitiesPage() {
         <span className='underline'>Back</span>
       </Link>
       <h3 className='text-3xl font-semibold capitalize text-center my-4 text-green'>
-        Create Charity
+        {charityToEdit ? "Edit" : "Create"} Charity
       </h3>
       <div className='mb-10 w-28  aspect-square mx-auto flex items-center bg-green mt-7 justify-center rounded-full'>
         {imageLoading ? (

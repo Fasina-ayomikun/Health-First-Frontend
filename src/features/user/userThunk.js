@@ -36,6 +36,7 @@ const singleUserThunk = async (url, thunkAPI) => {
       withCredentials: true,
     });
 
+    console.log(resp);
     return resp.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response.data.msg);

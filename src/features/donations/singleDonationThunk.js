@@ -4,18 +4,32 @@ import { checkUserAuthorization } from "../../utils/functions";
 // import { getRecipeReviews } from "../reviews/reviewsSlice";
 // import { getSingleRecipe } from "../singleRecipe/singleRecipeSlice";
 import { clearState } from "./singleDonationSlice";
+import { getSingleCharity } from "../singleCharity/singleCharitySlice";
 
 const createDonationThunk = async (body, thunkAPI) => {
   try {
+    console.log(body);
     const resp = await customUrl.post("/donations", body, {
       withCredentials: true,
     });
     // thunkAPI.dispatch(getRecipeReviews(resp.data.review.recipe));
-    // thunkAPI.dispatch(getSingleRecipe(resp.data.review.recipe));
+    thunkAPI.dispatch(getSingleCharity(resp.data.donation.charity));
     thunkAPI.dispatch(clearState());
     return resp.data;
   } catch (error) {
     return checkUserAuthorization(error, thunkAPI);
   }
 };
-export { createDonationThunk };
+const getUserDonationThunk = async (id, thunkAPI) => {
+  try {
+    const resp = await customUrl.get(`/donations/${id}`, {
+      withCredentials: true,
+    });
+    console.log(id);
+    console.log(resp.data);
+    return resp.data;
+  } catch (error) {
+    return checkUserAuthorization(error, thunkAPI);
+  }
+};
+export { createDonationThunk, getUserDonationThunk };

@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import { ImgContainer, Stars } from "../utils";
 import { checkUser } from "../utils/functions";
+import DonationModal from "../modals/DonationModal";
 function ShowCharity({ charity }) {
+  const [openDonation, setOpenDonation] = useState(false);
+
+  const navigate = useNavigate();
+
   const {
-    averageRatings,
-    name,
+    _id,
+    title,
     image,
-    noOfReviews,
+    description,
+    amountNeeded,
+    amountDonated,
     user: charityUser,
   } = charity;
   return (
@@ -20,25 +27,31 @@ function ShowCharity({ charity }) {
           className='rounded max-height h-full w-full object-cover'
         />
         <Link to={`/charities/${charity._id}`}>
-          <div className='absolute left-0 top-0 grid place-content-center w-full h-full bg-black opacity-80 rounded'>
-            <AiOutlineSearch className='text-4xl' />
+          <div className='absolute left-0 top-0 grid place-content-center bg-black opacity-80 w-full h-full  rounded'>
+            <AiOutlineSearch className='text-4xl text-grey' />
           </div>
         </Link>
       </div>
-      <div className='mt-3 flex items-start flex-wrap justify-between gap-3 break-all'>
-        <h4 className=' text-md  sm:order-last'>{name} </h4>
-        <h6 className='md:hidden underline text-zinc-300 text-xs '>
-          <Link to={`/charities/${charity._id}`}>Read more</Link>
-        </h6>
-      </div>
-      <div className='stars mt-2 text-xs flex items-center '>
-        {/* <Stars ratings={averageRatings} /> */}
-        <span className='text-grey text-xs ml-2'>( {noOfReviews} )</span>
-      </div>
-      <div className='flex items-center gap-3 mt-5'>
-        {/* <ImgContainer user={charity.user} small={true} /> */}
-        <p className='text-sm italic'>by {checkUser(charityUser)}</p>
-      </div>
+      <h5 className='text-xl text-green mt-4 text-center  uppercase '>
+        {title}
+      </h5>
+      <p className='text-center py-4  border-grey text-sm text-black'>
+        Donated ${amountDonated}/ <br />
+        <span className='text-green'> ${amountNeeded}</span>
+      </p>
+      <p className='text-sm text-center text-light-grey mb-4'>{description}</p>
+      <button
+        className='text-center text-sm my-3 bg-green text-white py-4 px-2  w-full'
+        onClick={() => {
+          // navigate(`/charities/${charity._id}`);
+          setOpenDonation(true);
+        }}
+      >
+        Donate Now
+      </button>
+      {openDonation && (
+        <DonationModal id={_id} setOpenDonation={setOpenDonation} />
+      )}
     </div>
   );
 }

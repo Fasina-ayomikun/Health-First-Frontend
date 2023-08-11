@@ -14,3 +14,12 @@ body {
 .line-height {
   line-height: 40px;
 }
+.main-image div {
+  visibility: hidden;
+}
+@media (hover: hover) {
+  .main-image:hover div {
+    visibility: visible;
+    transition: 0.3s ease-in;
+  }
+}

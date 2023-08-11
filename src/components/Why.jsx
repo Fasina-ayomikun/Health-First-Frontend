@@ -1,6 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import img from "../images/hero.jpg";
+import Loading from "../utils/Loading";
+import ShowCharity from "./showCharity";
+import { useDispatch, useSelector } from "react-redux";
+import { profileCharities } from "../utils/functions";
+import { getAllCharities } from "../features/charities/charitiesSlice";
 function Why() {
+  let currentProfile = JSON.parse(
+    localStorage.getItem("Mama-charity-user-profile")
+  );
+  const { charities } = useSelector((s) => s.charities);
+  const profileUserCharities = profileCharities(charities, currentProfile?._id);
+  const dispatch = useDispatch();
+  const { profileUser, isLoading } = useSelector((s) => s.user);
+  useEffect(() => {
+    dispatch(getAllCharities());
+  }, []);
   return (
     <section className='max-w-5xl md:w-4/5 sm:w-9/12 mx-auto py-8'>
       <div className='flex flex-wrap lg:grid grid-cols-2 gap-4 py-14 items-center justify-center '>
@@ -20,60 +35,19 @@ function Why() {
           </p>
         </div>
       </div>
-      <div className='my-10 flex flex-wrap lg:grid grid-cols-1 xl:grid-cols-3   lg:grid-cols-2 gap-10 items-center justify-center '>
-        <div>
-          <img src={img} alt='' />
-          <h5 className='text-xl text-green mt-4 text-center  uppercase '>
-            Help Rebuild Nepal
-          </h5>
-          <p className='text-center py-4  border-grey text-sm text-black'>
-            Donated $50000/ <br />
-            <span className='text-green'> $250000</span>
-          </p>
-          <p className='text-sm text-center text-light-grey mb-4'>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis
-            praesentium distinctio tempora aliquid dolorum,
-          </p>
-          <p className='text-center text-sm my-3 bg-green text-white py-4 px-2  '>
-            Donate Now
-          </p>
-        </div>{" "}
-        <div>
-          <img src={img} alt='' />
-          <h5 className='text-xl text-green mt-4 text-center  uppercase '>
-            Help Rebuild Nepal
-          </h5>
-          <p className='text-center py-4  border-grey text-sm text-black'>
-            Donated $50000/ <br />
-            <span className='text-green'> $250000</span>
-          </p>
-          <p className='text-sm text-center text-light-grey mb-4'>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis
-            praesentium distinctio tempora aliquid dolorum,
-          </p>
-          <p className='text-center text-sm my-3 bg-green text-white py-4 px-2  '>
-            Donate Now
-          </p>
-        </div>{" "}
-        <div>
-          <img src={img} alt='' />
-          <h5 className='text-xl text-green mt-4 text-center  uppercase '>
-            Help Rebuild Nepal
-          </h5>
-          <p className='text-center py-4  border-grey text-sm text-black'>
-            Donated $50000/ <br />
-            <span className='text-green'> $250000</span>
-          </p>
-          <p className='text-sm text-center text-light-grey mb-4'>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis
-            praesentium distinctio tempora aliquid dolorum,
-          </p>
-          <p className='text-center text-sm my-3 bg-green text-white py-4 px-2  '>
-            Donate Now
-          </p>
-        </div>{" "}
-      </div>
-      
+      {isLoading ? (
+        <Loading small={true} />
+      ) : (
+        <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10 items-center justify-between mt-16 w-full'>
+          {profileUserCharities.length < 1 ? (
+            <p className='text-grey h-48'>No charities to display.</p>
+          ) : (
+            profileUserCharities.map((charity) => {
+              return <ShowCharity key={charity._id} charity={charity} />;
+            })
+          )}
+        </div>
+      )}
     </section>
   );
 }

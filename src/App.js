@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import { ToastContainer } from "react-toastify";
 import ProfilePage from "./pages/ProfilePage";
 import CreateCharitiesPage from "./pages/CreateCharityPage";
+import SingleCharityPage from "./pages/SIngleCharityPage";
 function App() {
   return (
     <BrowserRouter>
@@ -29,9 +30,11 @@ function App() {
         <Route path='/about' element={<About />}></Route>
         <Route path='/contact' element={<ContactPage />}></Route>
         <Route path='/charities' element={<Charities />}></Route>
+        <Route path='/charities/:id' element={<SingleCharityPage />}></Route>
         <Route path='/sign-up' element={<SignUpPage />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/add' element={<CreateCharitiesPage />}></Route>
+        <Route path='/edit/:id' element={<CreateCharitiesPage />}></Route>
         <Route path='/profile/:id' element={<ProfilePage />}></Route>
       </Routes>
     </BrowserRouter>

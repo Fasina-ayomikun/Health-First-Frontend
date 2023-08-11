@@ -17,7 +17,7 @@ const initialState = {
   createdAt: "",
   isLoading: false,
   isEditing: false,
-  listOfDOnors: "",
+  listOfDonors: [],
   user: [],
   image: "",
 };
@@ -52,7 +52,7 @@ const singleCharitySlice = createSlice({
     handleChange: (state, { payload }) => {
       let { name, value } = payload;
 
-      return [...state, (state[name] = value)];
+      state[name] = value;
     },
     clearState: (state) => {
       return initialState;
@@ -69,7 +69,7 @@ const singleCharitySlice = createSlice({
           _id,
           title,
           description,
-          listOfDOnors,
+          listOfDonors,
           amountNeeded,
           amountDonated,
           user,
@@ -77,7 +77,7 @@ const singleCharitySlice = createSlice({
           video,
 
           createdAt,
-        } = payload.Charity;
+        } = payload.charity;
         toast.success(payload.msg);
         return {
           ...state,
@@ -87,7 +87,7 @@ const singleCharitySlice = createSlice({
 
           title,
           description,
-          listOfDOnors,
+          listOfDonors,
           amountNeeded,
           amountDonated,
           user,
@@ -111,7 +111,7 @@ const singleCharitySlice = createSlice({
         state.isError = false;
 
         toast.success(payload.msg);
-        localStorage.setItem("Mama-Charity-created", JSON.stringify(true));
+        localStorage.setItem("Health-Charity-created", JSON.stringify(true));
       })
       .addCase(createCharity.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -128,7 +128,7 @@ const singleCharitySlice = createSlice({
         state.isError = false;
 
         toast.success(payload.msg);
-        localStorage.setItem("Mama-Charity-created", JSON.stringify(true));
+        localStorage.setItem("Health-Charity-created", JSON.stringify(true));
       })
       .addCase(editCharity.rejected, (state, { payload }) => {
         state.isLoading = false;

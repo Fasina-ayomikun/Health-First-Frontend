@@ -109,6 +109,7 @@ export const userSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.profileUser = payload.user;
+
         localStorage.setItem(
           "Mama-charity-user-profile",
           JSON.stringify(payload.user)

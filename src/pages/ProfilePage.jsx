@@ -11,6 +11,7 @@ import { singleUser } from "../features/user/userSlice";
 import { checkUserPermission, profileCharities } from "../utils/functions";
 import Loading from "../utils/Loading";
 import ShowCharity from "../components/showCharity";
+import { getUserDonations } from "../features/donations/singleDonationSlice";
 function ProfilePage() {
   const [endSlice, setEndSlice] = useState(10);
   const [isActive, setIsActive] = useState(true);
@@ -19,6 +20,7 @@ function ProfilePage() {
     localStorage.getItem("Mama-charity-user-profile")
   );
   const { charities } = useSelector((s) => s.charities);
+  const { userDonations } = useSelector((s) => s.singleDonation);
   const profileUserCharities = profileCharities(charities, currentProfile?._id);
 
   const { profileUser, isLoading } = useSelector((s) => s.user);
@@ -28,6 +30,7 @@ function ProfilePage() {
   useEffect(() => {
     dispatch(singleUser(id));
     dispatch(getAllCharities());
+    dispatch(getUserDonations(currentProfile?._id));
   }, []);
   if (isLoading) {
     return <Loading small={false} />;
@@ -87,13 +90,44 @@ function ProfilePage() {
         </div>
         {isLoading ? (
           <Loading small={true} />
-        ) : (
+        ) : isActive ? (
           <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10 items-center justify-between mt-16 w-full'>
             {profileUserCharities.length < 1 ? (
               <p className='text-grey h-48'>No charities to display.</p>
             ) : (
               profileUserCharities.map((charity) => {
                 return <ShowCharity key={charity._id} charity={charity} />;
+              })
+            )}
+          </div>
+        ) : (
+          <div className='mt-16 w-full'>
+            {userDonations.length < 1 ? (
+              <p className='text-grey h-48'>No donations to display.</p>
+            ) : (
+              userDonations.map((donation) => {
+                const { title, description, amountNeeded, amountDonated } =
+                  donation.charity;
+                return (
+                  <div
+                    key={donation._id}
+                    className=' mb-5   flex items-start justify-between gap-8 bg-grey py-3 px-5 rounded text-black'
+                  >
+                    <div className='cursor-pointer w-full'>
+                      <div className='flex items-center justify-between w-full '>
+                        <h6 className='text-md font-extrabold'>{title}</h6>
+                        <p className='text-sm my-2 italic'>
+                          You donated {donation.amountDonated}
+                        </p>
+                      </div>
+                      <p className='text-sm my-2'>{description}</p>
+
+                      <p className='text-xs text-end w-full italic '>
+                        at {moment(donation.createdAt).format("Do MMM YYYY")}
+                      </p>
+                    </div>
+                  </div>
+                );
               })
             )}
           </div>
