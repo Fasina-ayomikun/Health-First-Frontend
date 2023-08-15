@@ -23,6 +23,9 @@ const logoutUserThunk = async (url, thunkAPI) => {
   try {
     const resp = await customUrl.get(url, {
       withCredentials: true,
+      headers: {
+        "Access-Control-Allow-Origin": process.env.REACT_APP_SERVER_URL,
+      },
     });
 
     return resp.data;
@@ -36,7 +39,6 @@ const singleUserThunk = async (url, thunkAPI) => {
       withCredentials: true,
     });
 
-    console.log(resp);
     return resp.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response.data.msg);
