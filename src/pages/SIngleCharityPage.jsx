@@ -135,11 +135,12 @@ function SingleCharityPage() {
         ) : (
           listOfDonors.slice(0, endSlice).map((donor) => {
             return (
-              <SingleDonation
+              <div>Hello</div>
+              /* <SingleDonation
                 key={donor._id}
                 donor={donor}
                 setOpenDonation={openDonationModal}
-              />
+              />*/
             );
           })
         )}

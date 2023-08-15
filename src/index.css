@@ -11,6 +11,10 @@
 body {
   overflow-x: hidden;
 }
+.active {
+  border-bottom: "2px solid #9ACD32";
+}
+
 .line-height {
   line-height: 40px;
 }
