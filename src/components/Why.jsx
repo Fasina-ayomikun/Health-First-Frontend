@@ -42,7 +42,7 @@ function Why() {
           {charities.length < 1 ? (
             <p className='text-grey h-48'>No charities to display.</p>
           ) : (
-            charities.map((charity) => {
+            charities.slice(0, 3).map((charity) => {
               return <ShowCharity key={charity._id} charity={charity} />;
             })
           )}
