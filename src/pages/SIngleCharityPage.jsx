@@ -26,10 +26,10 @@ function SingleCharityPage() {
     amountNeeded,
     amountDonated,
     listOfDonors,
+    medicalReport,
     user,
   } = useSelector((store) => store.singleCharity);
 
-  //   const { reviews } = useSelector((store) => store.reviews);
   const dispatch = useDispatch();
   const { id } = useParams();
   const openDonationModal = () => {
@@ -37,7 +37,6 @@ function SingleCharityPage() {
   };
   useEffect(() => {
     dispatch(getSingleCharity(id));
-    // dispatch(getRecipeReviews(id));
   }, []);
   useEffect(() => {
     if (image) {
@@ -101,14 +100,21 @@ function SingleCharityPage() {
             <span className='underline text-sm'>Completed</span>
           )}
         </div>
-        <h1 className='font-extrabold tracking-wider my-6 text-2xl text-center'>
+        <h1 className='  text-wrap font-extrabold tracking-wider my-6 text-2xl text-center'>
           {title}
         </h1>
 
-        <p className='md:px-10 sm:px-2 text-center tracking-wide text-sm'>
+        <p className=' text-wrap md:px-10 sm:px-2 text-center tracking-wide text-sm'>
           {description}
         </p>
-
+        <h1 className='  text-wrap font-extrabold tracking-wider my-6 text-2xl text-center'>
+          Medical Report
+        </h1>
+        <img
+          src={medicalReport}
+          alt='Medical Report'
+          className='h-80 w-full object-contain'
+        />
         <div className='my-7 mt-12 flex items-center justify-between '>
           <h3 className='text-xl font-extrabold tracking-wide '>Donations</h3>
           <h5

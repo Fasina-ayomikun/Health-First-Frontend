@@ -74,7 +74,7 @@ const singleCharitySlice = createSlice({
           amountDonated,
           user,
           image,
-          video,
+          medicalReport,
 
           createdAt,
         } = payload.charity;
@@ -84,7 +84,6 @@ const singleCharitySlice = createSlice({
           isLoading: false,
           isError: false,
           charityId: _id,
-
           title,
           description,
           listOfDonors,
@@ -92,7 +91,7 @@ const singleCharitySlice = createSlice({
           amountDonated,
           user,
           image,
-          video,
+          medicalReport,
 
           createdAt,
         };

@@ -5,7 +5,7 @@ import { AiFillPlusCircle, AiOutlineCheck } from "react-icons/ai";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { uploadImage } from "../features/files/filesSlice";
+import { uploadImage, uploadMedicalReport } from "../features/files/filesSlice";
 import {
   createCharity,
   editCharity,
@@ -20,8 +20,9 @@ function CreateCharitiesPage() {
   const [editingStep, setEditingStep] = useState(false);
 
   const { id } = useParams();
-  const formData = new FormData();
   const dispatch = useDispatch();
+  const formData = new FormData();
+  const medicalReportData = new FormData();
   const navigate = useNavigate();
   const ref = useRef(null);
   const ingredientRef = useRef(null);
@@ -41,7 +42,11 @@ function CreateCharitiesPage() {
     amountNeeded,
   } = useSelector((store) => store.singleCharity);
 
-  const { image, isLoading: imageLoading } = useSelector((s) => s.files);
+  const {
+    image,
+    medicalReport,
+    isLoading: imageLoading,
+  } = useSelector((s) => s.files);
 
   const handleEventChange = (input) => {
     const name = input.name;
@@ -54,6 +59,12 @@ function CreateCharitiesPage() {
     formData.append("image", file);
     dispatch(uploadImage(formData));
   };
+  const handleMedicalReportUpload = (e) => {
+    const input = e.target;
+    const file = input.files[0];
+    medicalReportData.append("image", file);
+    dispatch(uploadMedicalReport(medicalReportData));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,6 +76,7 @@ function CreateCharitiesPage() {
           description,
           amountNeeded,
           image,
+          medicalReport,
         })
       );
       localStorage.removeItem("Health-first-edit-charity");
@@ -75,6 +87,7 @@ function CreateCharitiesPage() {
           description,
           amountNeeded,
           image,
+          medicalReport,
         })
       );
     }
@@ -130,7 +143,7 @@ function CreateCharitiesPage() {
       </div>
       <form onSubmit={handleSubmit}>
         <div className='block'>
-          <label htmlFor='file' className='text-green mr-5  '>
+          <label htmlFor='file' className='text-green mr-5  capitalize '>
             charity's Picture:{" "}
           </label>
           <input
@@ -171,6 +184,20 @@ function CreateCharitiesPage() {
             placeholder='Amount Needed'
             className=' text-green block bg-transparent border-green border-b-2  w-full rounded h-10 px-3 '
           />
+          <div className='block'>
+            <label htmlFor='file' className='text-green mr-5  capitalize '>
+              Medical Report*:{" "}
+            </label>
+            <input
+              onChange={handleMedicalReportUpload}
+              type='file'
+              id='file'
+              accept='.jpeg,.jpg,.png'
+              name='image'
+              readOnly={isLoading ? true : false}
+              className=' sm:mt-3 w-4/6 md: mt-0 '
+            />
+          </div>
         </div>
         <button
           type='submit'

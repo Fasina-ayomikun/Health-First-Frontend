@@ -19,7 +19,7 @@ function ShowCharity({ charity }) {
     user: charityUser,
   } = charity;
   return (
-    <div className=' w-full  h-full '>
+    <div className=' w-full flex flex-col justify-between  h-full'>
       <div className='relative h-48  w-full max-h-80 main-image'>
         <img
           src={image}
@@ -39,9 +39,11 @@ function ShowCharity({ charity }) {
         Donated ${amountDonated}/ <br />
         <span className='text-green'> ${amountNeeded}</span>
       </p>
-      <p className='text-sm text-center text-light-grey mb-4'>{description}</p>
+      <p className='text-sm text-center text-light-grey mb-4 truncate'>
+        {description}
+      </p>
       <button
-        className='text-center text-sm my-3 bg-green text-white py-4 px-2  w-full'
+        className=' text-center text-sm my-3 bg-green text-white py-4 px-2  w-full'
         onClick={() => {
           // navigate(`/charities/${charity._id}`);
           setOpenDonation(true);

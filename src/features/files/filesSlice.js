@@ -7,10 +7,18 @@ const initialState = {
   isLoading: false,
   isError: false,
   image: "",
+  medicalReport: "",
 };
 
 export const uploadImage = createAsyncThunk(
   "files/uploadImage",
+  async (file, thunkAPI) => {
+    return imageThunk("/files/upload/image", file, thunkAPI);
+  }
+);
+
+export const uploadMedicalReport = createAsyncThunk(
+  "files/uploadMedicalReport",
   async (file, thunkAPI) => {
     return imageThunk("/files/upload/image", file, thunkAPI);
   }
@@ -37,6 +45,20 @@ export const filesSlice = createSlice({
         state.image = payload.image;
       })
       .addCase(uploadImage.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = true;
+        handleError(payload);
+      })
+      .addCase(uploadMedicalReport.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+      })
+      .addCase(uploadMedicalReport.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.medicalReport = payload.image;
+      })
+      .addCase(uploadMedicalReport.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.isError = true;
         handleError(payload);

@@ -17,9 +17,10 @@ body {
 .main-image div {
   visibility: hidden;
 }
-@media (hover: hover) {
-  .main-image:hover div {
-    visibility: visible;
-    transition: 0.3s ease-in;
-  }
+.text-wrap {
+  word-wrap: break-word;
+}
+.main-image:hover div {
+  visibility: visible;
+  transition: 0.3s ease-in;
 }

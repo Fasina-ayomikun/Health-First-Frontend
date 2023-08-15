@@ -10,7 +10,10 @@ import { ToastContainer } from "react-toastify";
 import ProfilePage from "./pages/ProfilePage";
 import CreateCharitiesPage from "./pages/CreateCharityPage";
 import SingleCharityPage from "./pages/SIngleCharityPage";
+import { getFromLocalStorage } from "./utils/localStorage";
+import ProtectedRoute from "./utils/ProtectedRoute";
 function App() {
+  const user = getFromLocalStorage();
   return (
     <BrowserRouter>
       <ToastContainer
@@ -34,7 +37,14 @@ function App() {
         <Route path='/sign-up' element={<SignUpPage />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/add' element={<CreateCharitiesPage />}></Route>
-        <Route path='/edit/:id' element={<CreateCharitiesPage />}></Route>
+        <Route
+          path='edit/:id'
+          element={
+            <ProtectedRoute id={user?.email}>
+              <CreateCharitiesPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path='/profile/:id' element={<ProfilePage />}></Route>
       </Routes>
     </BrowserRouter>
