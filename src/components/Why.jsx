@@ -39,10 +39,10 @@ function Why() {
         <Loading small={true} />
       ) : (
         <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10 items-center justify-between mt-16 w-full'>
-          {profileUserCharities.length < 1 ? (
+          {charities.length < 1 ? (
             <p className='text-grey h-48'>No charities to display.</p>
           ) : (
-            profileUserCharities.map((charity) => {
+            charities.map((charity) => {
               return <ShowCharity key={charity._id} charity={charity} />;
             })
           )}
