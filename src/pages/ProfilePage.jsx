@@ -63,7 +63,7 @@ function ProfilePage() {
             <h3
               className={`${
                 isActive ? "text-green" : "text-grey"
-              } mt-20 text-center  text-2xl font-semibold capitalize text-center my-4`}
+              } mt-20 text-center text-md md:text-2xl font-semibold capitalize text-center my-4`}
               onClick={() => setIsActive(!isActive)}
             >
               charities
@@ -71,7 +71,7 @@ function ProfilePage() {
             <h3
               className={`${
                 !isActive ? "text-green" : "text-grey"
-              } mt-20 text-center  text-2xl font-semibold capitalize text-center my-4`}
+              } mt-20 text-center text-md md:text-2xl font-semibold capitalize text-center my-4`}
               onClick={() => setIsActive(!isActive)}
             >
               {" "}
@@ -109,7 +109,7 @@ function ProfilePage() {
                 return (
                   <div
                     key={donation?._id}
-                    className=' mb-5   flex items-start justify-between gap-8 bg-grey py-3 px-5 rounded text-black'
+                    className=' mb-5 flex-cols md:flex-row  flex items-start justify-between gap-8 bg-grey py-3 px-5 rounded text-black'
                   >
                     <div className='cursor-pointer w-full'>
                       <div className='flex items-center justify-between w-full '>
@@ -120,7 +120,7 @@ function ProfilePage() {
                           You donated {donation?.amountDonated}
                         </p>
                       </div>
-                      <p className='text-sm my-2 truncate'>
+                      <p className='text-sm my-2 truncate text-wrap'>
                         {donation?.charity?.description}
                       </p>
 
