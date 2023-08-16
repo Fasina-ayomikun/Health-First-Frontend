@@ -33,7 +33,7 @@ function SingleCharityPage() {
   } = useSelector((store) => store.singleCharity);
 
   const { profileUser } = useSelector((s) => s.user);
-  const { charityDonations } = useSelector((s) => s.SingleDonation);
+  const { charityDonations } = useSelector((s) => s.singleDonation);
   const dispatch = useDispatch();
   const { id } = useParams();
   const openDonationModal = () => {
