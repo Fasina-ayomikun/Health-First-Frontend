@@ -120,7 +120,7 @@ function ProfilePage() {
                           You donated {donation?.amountDonated}
                         </p>
                       </div>
-                      <p className='text-sm my-2'>
+                      <p className='text-sm my-2 truncate'>
                         {donation?.charity?.description}
                       </p>
 
