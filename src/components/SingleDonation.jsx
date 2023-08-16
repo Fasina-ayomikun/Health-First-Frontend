@@ -16,10 +16,10 @@ function SingleDonation({ donor }) {
   return (
     <div className=' mb-5   flex items-start justify-between gap-8 bg-grey py-3 px-5 rounded text-black'>
       <div className='cursor-pointer'>
-        <h6 className='text-md font-extrabold'>{donor?.title}</h6>
-        <p className='text-sm my-2'>{donor?.description}</p>
+        <h6 className='text-md font-extrabold'>{donor?.charity?.title}</h6>
+        <p className='text-sm my-2'>{donor?.charity?.description}</p>
         <span className='italic text-zinc-700 text-xs  mt-2'>
-          by {checkUser(donor.charity)}
+          by {checkUser(donor?.user)}
         </span>
       </div>
     </div>
