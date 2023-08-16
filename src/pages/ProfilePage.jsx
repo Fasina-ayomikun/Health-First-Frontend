@@ -106,24 +106,23 @@ function ProfilePage() {
               <p className='text-grey h-48'>No donations to display.</p>
             ) : (
               userDonations.map((donation) => {
-                const { title, description, amountNeeded, amountDonated } =
-                  donation.charity;
+                const { title, description } = donation?.charity;
                 return (
                   <div
-                    key={donation._id}
+                    key={donation?._id}
                     className=' mb-5   flex items-start justify-between gap-8 bg-grey py-3 px-5 rounded text-black'
                   >
                     <div className='cursor-pointer w-full'>
                       <div className='flex items-center justify-between w-full '>
                         <h6 className='text-md font-extrabold'>{title}</h6>
                         <p className='text-sm my-2 italic'>
-                          You donated {donation.amountDonated}
+                          You donated {donation?.amountDonated}
                         </p>
                       </div>
                       <p className='text-sm my-2'>{description}</p>
 
                       <p className='text-xs text-end w-full italic '>
-                        at {moment(donation.createdAt).format("Do MMM YYYY")}
+                        at {moment(donation?.createdAt).format("Do MMM YYYY")}
                       </p>
                     </div>
                   </div>
