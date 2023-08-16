@@ -10,6 +10,8 @@ import Footer from "../components/Footer";
 import SingleDonation from "../components/SingleDonation";
 import ToggleModal from "../modals/ToggleModal";
 import DonationModal from "../modals/DonationModal";
+import { singleUser } from "../features/user/userSlice";
+import { getCharityDonations } from "../features/donations/singleDonationSlice";
 
 function SingleCharityPage() {
   const [open, setOpen] = useState(false);
@@ -30,6 +32,8 @@ function SingleCharityPage() {
     user,
   } = useSelector((store) => store.singleCharity);
 
+  const { profileUser } = useSelector((s) => s.user);
+  const { charityDonations } = useSelector((s) => s.SingleDonation);
   const dispatch = useDispatch();
   const { id } = useParams();
   const openDonationModal = () => {
@@ -37,6 +41,7 @@ function SingleCharityPage() {
   };
   useEffect(() => {
     dispatch(getSingleCharity(id));
+    dispatch(getCharityDonations(id));
   }, []);
   useEffect(() => {
     if (image) {
@@ -130,17 +135,16 @@ function SingleCharityPage() {
         </div>
         {isLoading ? (
           <Loading />
-        ) : listOfDonors.length < 1 ? (
+        ) : charityDonations.length < 1 ? (
           <h3>No donation on this charity.</h3>
         ) : (
-          listOfDonors.slice(0, endSlice).map((donor) => {
+          charityDonations.slice(0, endSlice).map((donor) => {
             return (
-              <div>Hello</div>
-              /* <SingleDonation
+              <SingleDonation
                 key={donor._id}
                 donor={donor}
                 setOpenDonation={openDonationModal}
-              />*/
+              />
             );
           })
         )}

@@ -32,4 +32,16 @@ const getUserDonationThunk = async (id, thunkAPI) => {
     return checkUserAuthorization(error, thunkAPI);
   }
 };
-export { createDonationThunk, getUserDonationThunk };
+const getCharityDonationThunk = async (id, thunkAPI) => {
+  try {
+    const resp = await customUrl.get(`/donations/charity/${id}`, {
+      withCredentials: true,
+    });
+    console.log(id);
+    console.log(resp.data);
+    return resp.data;
+  } catch (error) {
+    return checkUserAuthorization(error, thunkAPI);
+  }
+};
+export { createDonationThunk, getUserDonationThunk, getCharityDonationThunk };
