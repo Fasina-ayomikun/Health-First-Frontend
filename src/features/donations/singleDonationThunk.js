@@ -3,7 +3,7 @@ import { customUrl } from "../../utils/axios";
 import { checkUserAuthorization } from "../../utils/functions";
 // import { getRecipeReviews } from "../reviews/reviewsSlice";
 // import { getSingleRecipe } from "../singleRecipe/singleRecipeSlice";
-import { clearState } from "./singleDonationSlice";
+import { clearState, getCharityDonations } from "./singleDonationSlice";
 import { getSingleCharity } from "../singleCharity/singleCharitySlice";
 
 const createDonationThunk = async (body, thunkAPI) => {
@@ -12,7 +12,7 @@ const createDonationThunk = async (body, thunkAPI) => {
     const resp = await customUrl.post("/donations", body, {
       withCredentials: true,
     });
-    // thunkAPI.dispatch(getRecipeReviews(resp.data.review.recipe));
+    thunkAPI.dispatch(getCharityDonations(resp.data.review.charity));
     thunkAPI.dispatch(getSingleCharity(resp.data.donation.charity));
     thunkAPI.dispatch(clearState());
     return resp.data;

@@ -4,8 +4,8 @@ function Testimonial() {
   return (
     <section className='h-screen w-full   bg-background2 bg-cover bg-no-repeat object-cover '>
       <div className='w-full h-full bg-black opacity-70 flex items-center justify-center'>
-        <div className='w-3/5 '>
-          <p className='text-center text-xl lg:tex-3xl font-regular line-height tracking-wider text-white '>
+        <div className='w-full p-5 lg:w-3/5 '>
+          <p className='text-center text-sm mb-4  lg:tex-xl font-regular line-height tracking-wider text-white '>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aperiam
             corrupti nobis, mollitia, repellat, amet voluptates exercitationem
             facilis veritatis alias voluptatem odio sunt hic architecto aut

@@ -16,7 +16,7 @@ body {
 }
 
 .line-height {
-  line-height: 40px;
+  line-height: 20px;
 }
 .main-image div {
   visibility: hidden;
@@ -27,4 +27,9 @@ body {
 .main-image:hover div {
   visibility: visible;
   transition: 0.3s ease-in;
+}
+@media (max-width: 700px) {
+  .line-height {
+    line-height: 15px;
+  }
 }
