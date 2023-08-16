@@ -109,7 +109,7 @@ function ProfilePage() {
                 return (
                   <div
                     key={donation?._id}
-                    className=' mb-5 flex-cols md:flex-row  flex items-start justify-between gap-8 bg-grey py-3 px-5 rounded text-black'
+                    className=' mb-5 flex-col md:flex-row  flex items-start justify-between gap-8 bg-grey py-3 px-5 rounded text-black'
                   >
                     <div className='cursor-pointer w-full'>
                       <div className='flex items-center justify-between w-full '>
