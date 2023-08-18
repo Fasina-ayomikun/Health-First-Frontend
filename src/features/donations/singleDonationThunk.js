@@ -3,6 +3,7 @@ import { customUrl } from "../../utils/axios";
 import { checkUserAuthorization } from "../../utils/functions";
 import { clearState, getCharityDonations } from "./singleDonationSlice";
 import { getSingleCharity } from "../singleCharity/singleCharitySlice";
+import { getAllCharities } from "../charities/charitiesSlice";
 
 const createDonationThunk = async (body, thunkAPI) => {
   try {
@@ -10,6 +11,7 @@ const createDonationThunk = async (body, thunkAPI) => {
       withCredentials: true,
     });
     thunkAPI.dispatch(getCharityDonations(resp.data.donation.charity));
+    thunkAPI.dispatch(getAllCharities());
     thunkAPI.dispatch(getSingleCharity(resp.data.donation.charity));
     thunkAPI.dispatch(clearState());
     console.log(resp.data);
