@@ -9,8 +9,8 @@ const createDonationThunk = async (body, thunkAPI) => {
     const resp = await customUrl.post("/donations", body, {
       withCredentials: true,
     });
-    // thunkAPI.dispatch(getCharityDonations(resp.data.charity));
-    // thunkAPI.dispatch(getSingleCharity(resp.data.donation.charity));
+    thunkAPI.dispatch(getCharityDonations(resp.data.donation.charity));
+    thunkAPI.dispatch(getSingleCharity(resp.data.donation.charity));
     thunkAPI.dispatch(clearState());
     console.log(resp.data);
     return resp.data;
