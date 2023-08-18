@@ -41,7 +41,7 @@ const getCharityDonationThunk = async (id, thunkAPI) => {
     console.log(resp.data);
     return resp.data;
   } catch (error) {
-    return checkUserAuthorization(error, thunkAPI);
+    return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 };
 export { createDonationThunk, getUserDonationThunk, getCharityDonationThunk };

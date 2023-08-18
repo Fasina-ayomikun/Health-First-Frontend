@@ -5,7 +5,6 @@ import { checkUser } from "../utils/functions";
 import { singleUser } from "../features/user/userSlice";
 
 function SingleDonation({ donor }) {
-  useEffect(() => {}, []);
   return (
     <div className=' mb-5   flex items-start justify-between gap-8 bg-grey py-3 px-5 rounded text-black'>
       <div className='cursor-pointer'>

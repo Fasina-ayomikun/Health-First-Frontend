@@ -59,7 +59,7 @@ function Sidebar() {
         {user?.email ? (
           <>
             <li>
-              <NavLink to={`/profile/${user._id}`} activeClassName='active'>
+              <NavLink to={`/profile/${user?._id}`} activeClassName='active'>
                 {" "}
                 Profile
               </NavLink>
