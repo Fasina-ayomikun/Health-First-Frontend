@@ -12,9 +12,8 @@ function Charities() {
     localStorage.getItem("Mama-charity-user-profile")
   );
   const { charities } = useSelector((s) => s.charities);
-  const profileUserCharities = profileCharities(charities, currentProfile?._id);
   const dispatch = useDispatch();
-  const { profileUser, isLoading } = useSelector((s) => s.user);
+  const { isLoading } = useSelector((s) => s.user);
   useEffect(() => {
     dispatch(getAllCharities());
   }, []);
@@ -29,10 +28,10 @@ function Charities() {
           <Loading small={true} />
         ) : (
           <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10 items-center justify-between mt-16 w-full'>
-            {profileUserCharities.length < 1 ? (
+            {charities.length < 1 ? (
               <p className='text-grey h-48'>No charities to display.</p>
             ) : (
-              profileUserCharities.map((charity) => {
+              charities.map((charity) => {
                 return <ShowCharity key={charity._id} charity={charity} />;
               })
             )}

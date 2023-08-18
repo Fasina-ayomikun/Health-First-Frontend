@@ -8,7 +8,6 @@ const initialState = {
 
   isError: false,
   charities: [],
-  filteredCharities: [],
 };
 export const getAllCharities = createAsyncThunk(
   "charities/allCharities",
@@ -29,7 +28,6 @@ const charitiesSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.charities = payload.charities;
-        state.filteredCharities = [...payload.charities];
       })
       .addCase(getAllCharities.rejected, (state, { payload }) => {
         state.isLoading = false;

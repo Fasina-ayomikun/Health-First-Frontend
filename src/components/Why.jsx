@@ -10,9 +10,8 @@ function Why() {
     localStorage.getItem("Mama-charity-user-profile")
   );
   const { charities } = useSelector((s) => s.charities);
-  const profileUserCharities = profileCharities(charities, currentProfile?._id);
   const dispatch = useDispatch();
-  const { profileUser, isLoading } = useSelector((s) => s.user);
+  const { isLoading } = useSelector((s) => s.user);
   useEffect(() => {
     dispatch(getAllCharities());
   }, []);
