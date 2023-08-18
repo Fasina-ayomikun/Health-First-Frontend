@@ -14,7 +14,7 @@ const createDonationThunk = async (body, thunkAPI) => {
     thunkAPI.dispatch(getAllCharities());
     thunkAPI.dispatch(getSingleCharity(resp.data.donation.charity));
     thunkAPI.dispatch(clearState());
-    console.log(resp.data);
+
     return resp.data;
   } catch (error) {
     return checkUserAuthorization(error, thunkAPI);
@@ -25,8 +25,7 @@ const getUserDonationThunk = async (id, thunkAPI) => {
     const resp = await customUrl.get(`/donations/${id}`, {
       withCredentials: true,
     });
-    console.log(id);
-    console.log(resp.data);
+
     return resp.data;
   } catch (error) {
     return checkUserAuthorization(error, thunkAPI);
@@ -37,8 +36,7 @@ const getCharityDonationThunk = async (id, thunkAPI) => {
     const resp = await customUrl.get(`/donations/charity/${id}`, {
       withCredentials: true,
     });
-    console.log(id);
-    console.log(resp.data);
+
     return resp.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response.data.msg);

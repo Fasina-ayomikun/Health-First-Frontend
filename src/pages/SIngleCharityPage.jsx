@@ -97,7 +97,9 @@ function SingleCharityPage() {
         <div className='flex flex-wrap items-center justify-between gap-3 my-4'>
           <div className='stars  text-sm text-green flex items-center '>
             <span className='text-green text-sm ml-2 font-extrabold'>
-              Donated ${amountDonated} / ${amountNeeded}
+              Donated <span>&#8358;</span>
+              {amountDonated} / <span>&#8358;</span>
+              {amountNeeded}
             </span>
           </div>
           {amountDonated > amountNeeded && (

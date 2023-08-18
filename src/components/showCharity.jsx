@@ -36,8 +36,13 @@ function ShowCharity({ charity }) {
         {title}
       </h5>
       <p className='text-center py-4  border-grey text-sm text-black'>
-        Donated ${amountDonated}/ <br />
-        <span className='text-green'> ${amountNeeded}</span>
+        Donated <span>&#8358;</span>
+        {amountDonated}/ <br />
+        <span className='text-green'>
+          {" "}
+          <span>&#8358;</span>
+          {amountNeeded}
+        </span>
       </p>
       <p className='text-sm text-center text-light-grey mb-4 truncate'>
         {description}
@@ -45,7 +50,6 @@ function ShowCharity({ charity }) {
       <button
         className=' text-center text-sm my-3 bg-green text-white py-4 px-2  w-full'
         onClick={() => {
-          // navigate(`/charities/${charity._id}`);
           setOpenDonation(true);
         }}
       >

@@ -4,7 +4,6 @@ import { checkUserAuthorization } from "../../utils/functions";
 
 const imageThunk = async (url, file, thunkAPI) => {
   try {
-    console.log(url);
     const resp = await axios.post(
       `${process.env.REACT_APP_SERVER_URL}${url}`,
       file,
@@ -16,7 +15,6 @@ const imageThunk = async (url, file, thunkAPI) => {
       }
     );
 
-    console.log(resp);
     return resp.data;
   } catch (error) {
     return checkUserAuthorization(error, thunkAPI);
