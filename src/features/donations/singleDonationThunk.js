@@ -13,7 +13,17 @@ const createDonationThunk = async (body, thunkAPI) => {
     thunkAPI.dispatch(getCharityDonations(resp.data.donation.charity));
     thunkAPI.dispatch(getAllCharities());
     thunkAPI.dispatch(getSingleCharity(resp.data.donation.charity));
-    thunkAPI.dispatch(clearState());
+
+    return resp.data;
+  } catch (error) {
+    return checkUserAuthorization(error, thunkAPI);
+  }
+};
+const createPaystackThunk = async (body, thunkAPI) => {
+  try {
+    const resp = await customUrl.post("/paystack", body, {
+      withCredentials: true,
+    });
 
     return resp.data;
   } catch (error) {
@@ -39,8 +49,12 @@ const getCharityDonationThunk = async (id, thunkAPI) => {
 
     return resp.data;
   } catch (error) {
-     return checkUserAuthorization(error, thunkAPI);
- 
+    return checkUserAuthorization(error, thunkAPI);
   }
 };
-export { createDonationThunk, getUserDonationThunk, getCharityDonationThunk };
+export {
+  createDonationThunk,
+  getUserDonationThunk,
+  createPaystackThunk,
+  getCharityDonationThunk,
+};

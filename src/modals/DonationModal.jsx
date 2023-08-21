@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MdClose } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../utils/Loading";
+
+import { Link, useNavigate } from "react-router-dom";
 import {
   createDonation,
   clearState,
   handleChange,
+  createPaystack,
 } from "../features/donations/singleDonationSlice";
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
+import { getFromLocalStorage } from "../utils/localStorage";
 function DonationModal({ id, setOpenDonation }) {
   const dispatch = useDispatch();
-  const { isLoading, amountDonated } = useSelector((s) => s.singleDonation);
+  const user = getFromLocalStorage();
+  const { isLoading, amountDonated, paystackUrl } = useSelector(
+    (s) => s.singleDonation
+  );
+  const navigate = useNavigate();
   const handleEventChange = (input) => {
     const name = input.name;
     const value = input.value;
@@ -18,13 +26,23 @@ function DonationModal({ id, setOpenDonation }) {
   };
   const handleSubmit = () => {
     dispatch(
-      createDonation({
-        charity: id,
-        amountDonated,
+      createPaystack({
+        email: user?.email,
+        amount: amountDonated * 100,
       })
     );
   };
-
+  useEffect(() => {
+    if (paystackUrl) {
+      document.getElementById("paystack").click();
+      dispatch(
+        createDonation({
+          charity: id,
+          amountDonated,
+        })
+      );
+    }
+  }, [paystackUrl]);
   if (isLoading) {
     return (
       <section className='h-screen z-10 w-screen bg-black fixed top-0 left-0'>
@@ -63,6 +81,12 @@ function DonationModal({ id, setOpenDonation }) {
         >
           Donate
         </button>
+        <a
+          href={paystackUrl ? paystackUrl : ""}
+          target='_blank'
+          id='paystack'
+          className='none'
+        ></a>
       </div>
     </section>
   );

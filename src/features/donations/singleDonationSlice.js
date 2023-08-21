@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { handleError } from "../../utils/handleError";
 import {
   createDonationThunk,
+  createPaystackThunk,
   getCharityDonationThunk,
   getUserDonationThunk,
 } from "./singleDonationThunk";
@@ -14,6 +15,7 @@ const initialState = {
   createdAt: "",
   userDonations: [],
   charityDonations: [],
+  paystackUrl: "",
   isLoading: false,
   isError: false,
 };
@@ -22,6 +24,13 @@ export const createDonation = createAsyncThunk(
   "donations/createDonation",
   async (body, thunkAPI) => {
     return createDonationThunk(body, thunkAPI);
+  }
+);
+
+export const createPaystack = createAsyncThunk(
+  "donations/createPaystack",
+  async (body, thunkAPI) => {
+    return createPaystackThunk(body, thunkAPI);
   }
 );
 export const getUserDonations = createAsyncThunk(
@@ -63,6 +72,22 @@ const singleDonationSlice = createSlice({
         toast.success(payload.msg);
       })
       .addCase(createDonation.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = true;
+
+        handleError(payload);
+      })
+      .addCase(createPaystack.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+      })
+      .addCase(createPaystack.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.paystackUrl = payload.data.authorization_url;
+        toast.success(payload.msg);
+      })
+      .addCase(createPaystack.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.isError = true;
 
