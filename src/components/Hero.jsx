@@ -30,7 +30,7 @@ function Hero({ text }) {
               {text}
             </h1>
             <p className='text-center italic md:text-md sm:text-sm text-grey mt-2'>
-              My home made delicacies
+              health is wealth
             </p>
           </div>
         </div>
