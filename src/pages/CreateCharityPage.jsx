@@ -93,12 +93,8 @@ function CreateCharitiesPage() {
     }
   };
 
-  //   useEffect(() => {
-  //     if (editId && editingStep) {
-  //       const { step } = instructions.find((item) => item.id === editId);
-  //       ref.current.value = step;
-  //     }
-  //   }, [editId]);
+  
+
 
   useEffect(() => {
     if (localStorageInfo) {
