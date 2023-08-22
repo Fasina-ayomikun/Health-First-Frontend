@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-// import { ImgContainer, Stars } from "../utils";
 import { checkUser } from "../utils/functions";
 import DonationModal from "../modals/DonationModal";
 function ShowCharity({ charity }) {
