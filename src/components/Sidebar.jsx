@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../images/logo-gold.png";
-import { ImHome } from "react-icons/im";
 import { BsQuestionCircle } from "react-icons/bs";
 import {
   MdClose,
-  MdContacts,
-  MdFoodBank,
-  MdOutlineFastfood,
 } from "react-icons/md";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { AiFillProfile } from "react-icons/ai";
@@ -16,7 +12,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getFromLocalStorage } from "../utils/localStorage";
 import { setCloseSidebar, setOpenSidebar } from "../features/modal/modalSlice";
 function Sidebar() {
-  // const user = {};
   const user = getFromLocalStorage();
   const navigate = useNavigate();
   const dispatch = useDispatch();
