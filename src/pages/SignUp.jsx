@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-// import { uploadImage } from "../features/files/filesSlice";
 import { registerUser } from "../features/user/userSlice";
 import Loading from "../utils/Loading";
 import ShowPassword from "../utils/ShowPassword";
@@ -21,7 +20,6 @@ function SignUpPage() {
   const [showPassword2, setShowPassword2] = useState(false);
 
   const { isLoading, user } = useSelector((store) => store.user);
-  //   const { image } = useSelector((store) => store.files);
   const dispatch = useDispatch();
   const formData = new FormData();
 
@@ -37,7 +35,7 @@ function SignUpPage() {
   };
   const registerNewUser = (e) => {
     e.preventDefault();
-    // value.profileImage = image;
+   
     if (value.password !== value.password2) {
       toast.warning("Passwords do not match");
     } else {
@@ -47,11 +45,7 @@ function SignUpPage() {
   };
 
   const navigate = useNavigate();
-  const handleFileUpload = (input) => {
-    const file = input.files[0];
-    formData.append("image", file);
-    // dispatch(uploadImage(formData));
-  };
+
   useEffect(() => {
     if (clicked.current) {
       clicked.current = false;

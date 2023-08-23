@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import Navbar from "./Navbar";
 import { useState } from "react";
-// import { useSelector } from "react-redux";
 function Hero({ text }) {
   const [stickyNav, setStickyNav] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  //   const { isSidebarOpen } = useSelector((s) => s.modal);
-  useEffect(() => {
+   useEffect(() => {
     const eventListener = window.addEventListener("scroll", () => {
       if (window.scrollY > window.innerHeight) {
         setStickyNav(true);

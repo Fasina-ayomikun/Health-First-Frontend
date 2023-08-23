@@ -5,13 +5,11 @@ import { useDispatch } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { setOpenSidebar } from "../features/modal/modalSlice";
 import logo from "../images/logo-white.png";
-// import ImgContainer from "../utils/ImgContainer";
 import { getFromLocalStorage } from "../utils/localStorage";
 import Sidebar from "./Sidebar";
 import { logoutUser } from "../features/user/userSlice";
 function Navbar() {
   const [stickyNav, setStickyNav] = useState(false);
-  // const [user, setUSer] = useState({});
   const dispatch = useDispatch();
   let user = getFromLocalStorage();
 

@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-// import { uploadImage } from "../features/files/filesSlice";
 import { loginUser } from "../features/user/userSlice";
 import Loading from "../utils/Loading";
 import ShowPassword from "../utils/ShowPassword";
@@ -21,7 +20,7 @@ function Login() {
   const [showPassword2, setShowPassword2] = useState(false);
 
   const { isLoading, user } = useSelector((store) => store.user);
-  //   const { image } = useSelector((store) => store.files);
+  
   const dispatch = useDispatch();
   const formData = new FormData();
 
@@ -42,11 +41,7 @@ function Login() {
   };
 
   const navigate = useNavigate();
-  const handleFileUpload = (input) => {
-    const file = input.files[0];
-    formData.append("image", file);
-    // dispatch(uploadImage(formData));
-  };
+  
   useEffect(() => {
     if (clicked.current) {
       clicked.current = false;
@@ -104,8 +99,7 @@ function Login() {
         </div>
         <button
           type='submit'
-          //   disabled={isLoading ? true : null}
-          className='capitalize border-2 py-2 px-14  rounded  mx-auto flex my-12 text-black border-green'
+            className='capitalize border-2 py-2 px-14  rounded  mx-auto flex my-12 text-black border-green'
         >
           Login
         </button>
