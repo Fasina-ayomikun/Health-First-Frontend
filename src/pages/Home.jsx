@@ -7,7 +7,7 @@ import Footer from "../components/Footer";
 function Home() {
   return (
     <>
-      <Hero text='Healthy First' />;
+      <Hero text='Health First' />;
       <Why />
       <Testimonial />
       <Footer />
